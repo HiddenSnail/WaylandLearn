@@ -12,7 +12,7 @@
 static const unsigned WIDTH = 320;
 static const unsigned HEIGHT = 200;
 static const unsigned CURSOR_WIDTH = 100;
-static const unsigned CURSOR_HEIGHT = 59;
+static const unsigned CURSOR_HEIGHT = 30;
 static const int32_t CURSOR_HOT_SPOT_X = 10;
 static const int32_t CURSOR_HOT_SPOT_Y = 35;
 
@@ -39,11 +39,13 @@ int main(void)
         perror("Error opening surface image");
         return EXIT_FAILURE;
     }
-
+    // 这个地方会创建一个共享内存区，里面的image供client和server使用，从而提升效率
     pool = hello_create_memory_pool(image);
     surface = hello_create_surface();
     buffer = hello_create_buffer(pool, WIDTH, HEIGHT);
+    
     hello_bind_buffer(buffer, surface);
+   
     hello_set_cursor_from_pool(pool, CURSOR_WIDTH,
         CURSOR_HEIGHT, CURSOR_HOT_SPOT_X, CURSOR_HOT_SPOT_Y);
     hello_set_button_callback(surface, on_button);
