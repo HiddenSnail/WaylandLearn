@@ -44,6 +44,7 @@ int main(void)
     surface = hello_create_surface();
     buffer = hello_create_buffer(pool, WIDTH, HEIGHT);
     
+    // bind操作会将surface提交至服务器
     hello_bind_buffer(buffer, surface);
    
     hello_set_cursor_from_pool(pool, CURSOR_WIDTH,
